@@ -1,0 +1,272 @@
+{
+  "timestamp": "2026-01-12T17:13:06.107327",
+  "model_name": "demo_model",
+  "version": "1.0.0",
+  "drift_analysis": {
+    "total_features": 20,
+    "drifted_features": 5,
+    "drift_percentage": 25.0,
+    "overall_severity": "critical",
+    "feature_results": [
+      {
+        "feature": "feature_0",
+        "ks_statistic": 0.0046,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0004,
+        "wasserstein_distance": 0.001,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_1",
+        "ks_statistic": 0.0095,
+        "ks_pvalue": 0.9863,
+        "psi_score": 0.0004,
+        "wasserstein_distance": 0.0016,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_2",
+        "ks_statistic": 0.0036,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0001,
+        "wasserstein_distance": 0.0006,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_3",
+        "ks_statistic": 0.2192,
+        "ks_pvalue": 0.0,
+        "psi_score": 0.7405,
+        "wasserstein_distance": 0.0586,
+        "severity": "critical",
+        "is_drifted": true
+      },
+      {
+        "feature": "feature_4",
+        "ks_statistic": 0.0107,
+        "ks_pvalue": 0.9571,
+        "psi_score": 0.0012,
+        "wasserstein_distance": 0.002,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_5",
+        "ks_statistic": 0.4491,
+        "ks_pvalue": 0.0,
+        "psi_score": 2.2133,
+        "wasserstein_distance": 0.1136,
+        "severity": "critical",
+        "is_drifted": true
+      },
+      {
+        "feature": "feature_6",
+        "ks_statistic": 0.006,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0006,
+        "wasserstein_distance": 0.0013,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_7",
+        "ks_statistic": 0.256,
+        "ks_pvalue": 0.0,
+        "psi_score": 0.6802,
+        "wasserstein_distance": 0.0709,
+        "severity": "critical",
+        "is_drifted": true
+      },
+      {
+        "feature": "feature_8",
+        "ks_statistic": 0.0045,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0003,
+        "wasserstein_distance": 0.0009,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_9",
+        "ks_statistic": 0.006,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0002,
+        "wasserstein_distance": 0.0013,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_10",
+        "ks_statistic": 0.5214,
+        "ks_pvalue": 0.0,
+        "psi_score": 2.1674,
+        "wasserstein_distance": 0.1682,
+        "severity": "critical",
+        "is_drifted": true
+      },
+      {
+        "feature": "feature_11",
+        "ks_statistic": 0.0043,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0002,
+        "wasserstein_distance": 0.0007,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_12",
+        "ks_statistic": 0.0055,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0006,
+        "wasserstein_distance": 0.0014,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_13",
+        "ks_statistic": 0.0054,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0003,
+        "wasserstein_distance": 0.0009,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_14",
+        "ks_statistic": 0.0047,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0003,
+        "wasserstein_distance": 0.0009,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_15",
+        "ks_statistic": 0.0026,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0005,
+        "wasserstein_distance": 0.0007,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_16",
+        "ks_statistic": 0.3179,
+        "ks_pvalue": 0.0,
+        "psi_score": 1.0876,
+        "wasserstein_distance": 0.0753,
+        "severity": "critical",
+        "is_drifted": true
+      },
+      {
+        "feature": "feature_17",
+        "ks_statistic": 0.008,
+        "ks_pvalue": 0.9987,
+        "psi_score": 0.0005,
+        "wasserstein_distance": 0.001,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_18",
+        "ks_statistic": 0.0095,
+        "ks_pvalue": 0.9878,
+        "psi_score": 0.0006,
+        "wasserstein_distance": 0.0022,
+        "severity": "none",
+        "is_drifted": false
+      },
+      {
+        "feature": "feature_19",
+        "ks_statistic": 0.0043,
+        "ks_pvalue": 1.0,
+        "psi_score": 0.0005,
+        "wasserstein_distance": 0.001,
+        "severity": "none",
+        "is_drifted": false
+      }
+    ],
+    "recommendations": [
+      "[CRITICAL] Immediate model retraining recommended",
+      "Investigate data pipeline for upstream changes",
+      "Critical drift detected in: feature_3, feature_5, feature_7, feature_10, feature_16",
+      "5 features show significant distribution shift (PSI > 0.15)"
+    ],
+    "timestamp": "2026-01-12T22:13:06.031994"
+  },
+  "performance_analysis": {
+    "current_metrics": {
+      "timestamp": "2026-01-12T22:13:06.102234",
+      "accuracy": 0.974,
+      "precision": 0.9742,
+      "recall": 0.9742,
+      "f1": 0.9742,
+      "sample_count": 1000
+    },
+    "baseline_metrics": {
+      "accuracy": 0.937,
+      "precision": 0.9351,
+      "recall": 0.937,
+      "f1": 0.936
+    },
+    "metric_deltas": {
+      "accuracy": 0.037,
+      "precision": 0.0391,
+      "recall": 0.0372,
+      "f1": 0.0381
+    },
+    "status": "healthy",
+    "trend": "stable",
+    "predictions_analyzed": 5000,
+    "recommendations": [
+      "[OK] Model performing within expected parameters"
+    ],
+    "historical_metrics": [
+      {
+        "timestamp": "2026-01-12T22:13:06.095652",
+        "accuracy": 0.974,
+        "precision": 0.9742,
+        "recall": 0.9742,
+        "f1": 0.9742,
+        "sample_count": 1000
+      }
+    ]
+  },
+  "health_summary": {
+    "overall_status": "critical",
+    "drift_status": "critical",
+    "performance_status": "healthy",
+    "last_check": "2026-01-12T22:13:06.104555",
+    "active_alerts": 6,
+    "recommendations": [
+      "[CRITICAL] Immediate model retraining recommended",
+      "Investigate data pipeline for upstream changes",
+      "Critical drift detected in: feature_3, feature_5, feature_7, feature_10, feature_16",
+      "[OK] Model performing within expected parameters"
+    ],
+    "retraining": {
+      "should_retrain": true,
+      "urgency": "immediate",
+      "reasons": [
+        "Critical drift detected in 5 features"
+      ],
+      "affected_features": [
+        "feature_3",
+        "feature_5",
+        "feature_7",
+        "feature_10",
+        "feature_16"
+      ],
+      "estimated_impact": "High - Model predictions may be unreliable",
+      "suggested_actions": [
+        "Collect recent production data for retraining",
+        "Validate data quality and preprocessing pipeline",
+        "Investigate feature engineering for: feature_3, feature_5, feature_7, feature_10, feature_16",
+        "Run A/B test with retrained model before full deployment"
+      ]
+    }
+  }
+}

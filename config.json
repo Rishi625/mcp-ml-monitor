@@ -1,0 +1,33 @@
+{
+  "model_name": "production_model",
+  "model_version": "1.0.0",
+  "drift": {
+    "ks_threshold": 0.05,
+    "psi_warning_threshold": 0.1,
+    "psi_critical_threshold": 0.2,
+    "wasserstein_threshold": 0.15,
+    "min_samples": 100,
+    "monitored_features": []
+  },
+  "performance": {
+    "baseline_accuracy": 0.0,
+    "baseline_precision": 0.0,
+    "baseline_recall": 0.0,
+    "baseline_f1": 0.0,
+    "accuracy_warning_threshold": 0.05,
+    "accuracy_critical_threshold": 0.10,
+    "monitoring_window": 1000,
+    "min_predictions": 100
+  },
+  "alerts": {
+    "alerts_enabled": true,
+    "enable_critical_alerts": true,
+    "enable_warning_alerts": true,
+    "retrain_on_critical_drift": true,
+    "retrain_on_performance_drop": 0.08,
+    "alert_cooldown": 3600
+  },
+  "log_level": "INFO",
+  "log_file": null
+}
+
