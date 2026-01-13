@@ -312,10 +312,10 @@ class DriftDetector:
         recommendations = []
         
         if severity == DriftSeverity.CRITICAL:
-            recommendations.append("[CRITICAL] Immediate model retraining recommended")
+            recommendations.append("CRITICAL: Immediate model retraining recommended")
             recommendations.append("Investigate data pipeline for upstream changes")
         elif severity == DriftSeverity.WARNING:
-            recommendations.append("[WARNING] Monitor closely and prepare for retraining")
+            recommendations.append("WARNING: Monitor closely and prepare for retraining")
             recommendations.append("Validate model predictions manually on recent data")
         
         # Feature-specific recommendations - DYNAMICALLY generated from actual results
@@ -330,7 +330,7 @@ class DriftDetector:
             recommendations.append(f"{len(high_psi)} features show significant distribution shift (PSI > 0.15)")
         
         if not recommendations:
-            recommendations.append("[OK] No significant drift detected. Model health is good.")
+            recommendations.append("No significant drift detected. Model health is good.")
         
         return recommendations
 

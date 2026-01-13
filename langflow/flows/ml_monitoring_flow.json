@@ -1,0 +1,224 @@
+{
+  "name": "ML Model Monitoring Pipeline",
+  "description": "Enterprise-grade ML monitoring with drift detection, performance analysis, and automated remediation",
+  "version": "1.0.0",
+  "author": "Rushi",
+  "tags": ["ml-ops", "monitoring", "drift-detection", "enterprise"],
+  
+  "nodes": [
+    {
+      "id": "data_ingestion",
+      "type": "custom",
+      "component": "components.data_ingestion.CSVIngestionComponent",
+      "position": {"x": 100, "y": 100},
+      "config": {
+        "delimiter": ",",
+        "date_columns": ["timestamp"],
+        "numeric_columns": []
+      },
+      "inputs": ["file_path"],
+      "outputs": ["data", "metadata"]
+    },
+    {
+      "id": "data_validator",
+      "type": "custom",
+      "component": "components.data_ingestion.DataValidatorComponent",
+      "position": {"x": 300, "y": 100},
+      "config": {
+        "schema": {},
+        "required_columns": [],
+        "value_ranges": {}
+      },
+      "inputs": ["data"],
+      "outputs": ["validation_result"]
+    },
+    {
+      "id": "drift_detector",
+      "type": "custom",
+      "component": "components.ml_monitoring.DriftDetectionComponent",
+      "position": {"x": 500, "y": 100},
+      "config": {
+        "ks_threshold": 0.05,
+        "psi_warning": 0.1,
+        "psi_critical": 0.2,
+        "n_bins": 10
+      },
+      "inputs": ["current_data", "reference_data"],
+      "outputs": ["drift_report"]
+    },
+    {
+      "id": "anomaly_detector",
+      "type": "custom",
+      "component": "components.ml_monitoring.AnomalyDetectionComponent",
+      "position": {"x": 500, "y": 250},
+      "config": {
+        "contamination": 0.1,
+        "n_estimators": 100
+      },
+      "inputs": ["data"],
+      "outputs": ["anomaly_report"]
+    },
+    {
+      "id": "performance_analyzer",
+      "type": "custom",
+      "component": "components.ml_monitoring.PerformanceAnalysisComponent",
+      "position": {"x": 500, "y": 400},
+      "config": {
+        "warning_threshold": 0.05,
+        "critical_threshold": 0.10
+      },
+      "inputs": ["y_true", "y_pred"],
+      "outputs": ["performance_report"]
+    },
+    {
+      "id": "time_series_forecast",
+      "type": "custom",
+      "component": "components.ml_monitoring.TimeSeriesForecastComponent",
+      "position": {"x": 700, "y": 250},
+      "config": {
+        "forecast_periods": 24
+      },
+      "inputs": ["metric_data"],
+      "outputs": ["forecast_report"]
+    },
+    {
+      "id": "root_cause_analyzer",
+      "type": "custom",
+      "component": "components.intelligent_response.RootCauseAnalysisComponent",
+      "position": {"x": 800, "y": 100},
+      "config": {},
+      "inputs": ["drift_report", "performance_report"],
+      "outputs": ["analysis"]
+    },
+    {
+      "id": "remedy_suggester",
+      "type": "custom",
+      "component": "components.intelligent_response.RemedySuggestionComponent",
+      "position": {"x": 800, "y": 250},
+      "config": {},
+      "inputs": ["drift_report", "performance_report", "anomaly_report"],
+      "outputs": ["remedies"]
+    },
+    {
+      "id": "code_generator",
+      "type": "custom",
+      "component": "components.intelligent_response.CodeGeneratorComponent",
+      "position": {"x": 800, "y": 400},
+      "config": {},
+      "inputs": ["model_name", "features", "target"],
+      "outputs": ["retraining_script", "feature_fix"]
+    },
+    {
+      "id": "ansible_generator",
+      "type": "custom",
+      "component": "components.intelligent_response.AnsiblePlaybookComponent",
+      "position": {"x": 800, "y": 550},
+      "config": {},
+      "inputs": ["model_name", "action_type"],
+      "outputs": ["playbook"]
+    },
+    {
+      "id": "shap_explainer",
+      "type": "custom",
+      "component": "components.intelligent_response.SHAPExplainerComponent",
+      "position": {"x": 700, "y": 550},
+      "config": {},
+      "inputs": ["model", "data", "feature_names"],
+      "outputs": ["explanation"]
+    },
+    {
+      "id": "slack_alert",
+      "type": "custom",
+      "component": "components.integrations.SlackAlertComponent",
+      "position": {"x": 1000, "y": 100},
+      "config": {
+        "webhook_url": "${SLACK_WEBHOOK_URL}"
+      },
+      "inputs": ["severity", "title", "message", "details"],
+      "outputs": ["alert_status"]
+    },
+    {
+      "id": "github_issue",
+      "type": "custom",
+      "component": "components.integrations.GitHubIssueComponent",
+      "position": {"x": 1000, "y": 250},
+      "config": {
+        "token": "${GITHUB_TOKEN}",
+        "repo": "${GITHUB_REPO}"
+      },
+      "inputs": ["severity", "drift_report", "performance_report", "recommendations"],
+      "outputs": ["issue_url"]
+    },
+    {
+      "id": "prometheus_pusher",
+      "type": "custom",
+      "component": "components.integrations.PrometheusConnectorComponent",
+      "position": {"x": 1000, "y": 400},
+      "config": {
+        "pushgateway_url": "http://localhost:9091"
+      },
+      "inputs": ["job_name", "metrics"],
+      "outputs": ["push_status"]
+    },
+    {
+      "id": "kubernetes_connector",
+      "type": "custom",
+      "component": "components.integrations.KubernetesConnectorComponent",
+      "position": {"x": 1000, "y": 550},
+      "config": {},
+      "inputs": ["deployment_name", "namespace", "action"],
+      "outputs": ["k8s_status"]
+    },
+    {
+      "id": "multi_model_compare",
+      "type": "custom",
+      "component": "components.advanced_features.MultiModelComparisonComponent",
+      "position": {"x": 1200, "y": 100},
+      "config": {},
+      "inputs": ["model_metrics"],
+      "outputs": ["comparison_report"]
+    },
+    {
+      "id": "ab_testing",
+      "type": "custom",
+      "component": "components.advanced_features.ABTestingCoordinator",
+      "position": {"x": 1200, "y": 250},
+      "config": {},
+      "inputs": ["experiment_config", "outcomes"],
+      "outputs": ["experiment_results"]
+    },
+    {
+      "id": "auto_retrain",
+      "type": "custom",
+      "component": "components.advanced_features.AutomatedRetrainingPipeline",
+      "position": {"x": 1200, "y": 400},
+      "config": {},
+      "inputs": ["model_id", "drift_score", "performance_delta"],
+      "outputs": ["retrain_decision", "pipeline_status"]
+    }
+  ],
+  
+  "edges": [
+    {"source": "data_ingestion", "target": "data_validator", "sourceHandle": "data", "targetHandle": "data"},
+    {"source": "data_validator", "target": "drift_detector", "sourceHandle": "validation_result", "targetHandle": "current_data"},
+    {"source": "data_validator", "target": "anomaly_detector", "sourceHandle": "validation_result", "targetHandle": "data"},
+    {"source": "drift_detector", "target": "root_cause_analyzer", "sourceHandle": "drift_report", "targetHandle": "drift_report"},
+    {"source": "performance_analyzer", "target": "root_cause_analyzer", "sourceHandle": "performance_report", "targetHandle": "performance_report"},
+    {"source": "drift_detector", "target": "remedy_suggester", "sourceHandle": "drift_report", "targetHandle": "drift_report"},
+    {"source": "performance_analyzer", "target": "remedy_suggester", "sourceHandle": "performance_report", "targetHandle": "performance_report"},
+    {"source": "anomaly_detector", "target": "remedy_suggester", "sourceHandle": "anomaly_report", "targetHandle": "anomaly_report"},
+    {"source": "root_cause_analyzer", "target": "slack_alert", "sourceHandle": "analysis", "targetHandle": "message"},
+    {"source": "remedy_suggester", "target": "github_issue", "sourceHandle": "remedies", "targetHandle": "recommendations"},
+    {"source": "drift_detector", "target": "auto_retrain", "sourceHandle": "drift_report", "targetHandle": "drift_score"},
+    {"source": "performance_analyzer", "target": "auto_retrain", "sourceHandle": "performance_report", "targetHandle": "performance_delta"}
+  ],
+  
+  "variables": {
+    "SLACK_WEBHOOK_URL": {"type": "secret", "description": "Slack webhook URL"},
+    "GITHUB_TOKEN": {"type": "secret", "description": "GitHub personal access token"},
+    "GITHUB_REPO": {"type": "string", "description": "GitHub repository (owner/repo)"},
+    "MODEL_NAME": {"type": "string", "description": "Model identifier"},
+    "MONITORING_INTERVAL": {"type": "number", "default": 300, "description": "Monitoring interval in seconds"}
+  }
+}
+

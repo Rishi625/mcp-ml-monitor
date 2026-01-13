@@ -283,15 +283,15 @@ class PerformanceMonitor:
         recommendations = []
         
         if status == PerformanceStatus.CRITICAL:
-            recommendations.append("[CRITICAL] Model retraining required immediately")
+            recommendations.append("CRITICAL: Model retraining required immediately")
             recommendations.append("Consider rolling back to previous model version")
             recommendations.append("Investigate recent data changes or upstream issues")
         elif status == PerformanceStatus.DEGRADED:
-            recommendations.append("[WARNING] Schedule model retraining soon")
+            recommendations.append("WARNING: Schedule model retraining soon")
             recommendations.append("Increase monitoring frequency")
             recommendations.append("Review recent predictions for error patterns")
         elif status == PerformanceStatus.WARNING:
-            recommendations.append("[NOTICE] Minor performance decline detected")
+            recommendations.append("NOTICE: Minor performance decline detected")
             recommendations.append("Continue monitoring and prepare retraining pipeline")
         
         # Metric-specific recommendations - DYNAMICALLY generated based on actual deltas
@@ -301,12 +301,12 @@ class PerformanceMonitor:
             recommendations.append("Low precision: Review false positive cases")
         
         if trend == "declining":
-            recommendations.append("[TREND] Performance declining over time")
+            recommendations.append("Trend: Performance declining over time")
         elif trend == "improving":
-            recommendations.append("[TREND] Performance improving")
+            recommendations.append("Trend: Performance improving")
         
         if not recommendations:
-            recommendations.append("[OK] Model performing within expected parameters")
+            recommendations.append("Model performing within expected parameters")
         
         return recommendations
     

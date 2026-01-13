@@ -50,8 +50,8 @@ def create_synthetic_data():
     df = pd.DataFrame(X, columns=feature_names)
     df['target'] = y
     
-    print(f"[OK] Created dataset with {len(df)} samples, {len(feature_names)} features")
-    print(f"[OK] Target distribution: {dict(pd.Series(y).value_counts())}")
+    print(f"Created dataset with {len(df)} samples, {len(feature_names)} features")
+    print(f"Target distribution: {dict(pd.Series(y).value_counts())}")
     
     return df, feature_names
 
@@ -75,7 +75,7 @@ def simulate_data_drift(df: pd.DataFrame, drift_features: int = 5):
         
         production_df[col] = production_df[col] * scale + shift
     
-    print(f"[OK] Created production dataset with drift in {drift_features} features")
+    print(f"Created production dataset with drift in {drift_features} features")
     
     return production_df, list(drifted_cols)
 
@@ -106,7 +106,7 @@ def train_model(train_df: pd.DataFrame):
         'f1': f1_score(y_val, y_pred_val)
     }
     
-    print(f"[OK] Model trained successfully")
+    print(f"Model trained successfully")
     print(f"  Baseline Accuracy:  {baseline['accuracy']:.4f}")
     print(f"  Baseline Precision: {baseline['precision']:.4f}")
     print(f"  Baseline Recall:    {baseline['recall']:.4f}")
@@ -129,7 +129,7 @@ def run_drift_detection(reference_data: pd.DataFrame, production_data: pd.DataFr
     
     # Set reference (training) data
     detector.set_reference(reference_data)
-    print("[OK] Reference data loaded")
+    print("Reference data loaded")
     
     # Detect drift - ALL RESULTS ARE DYNAMICALLY COMPUTED
     report = detector.detect_drift(production_data)
@@ -146,7 +146,7 @@ def run_drift_detection(reference_data: pd.DataFrame, production_data: pd.DataFr
     print("-" * 70)
     
     for result in sorted(report.feature_results, key=lambda x: x.psi_score, reverse=True)[:10]:
-        status = "[DRIFT]" if result.is_drifted else "[OK]"
+        status = "DRIFT" if result.is_drifted else "OK"
         print(f"{result.feature_name:<15} {result.ks_statistic:<10.4f} {result.psi_score:<10.4f} {result.wasserstein_dist:<12.4f} {status:<10}")
     
     print("\nRECOMMENDATIONS (Dynamically Generated):")
@@ -170,7 +170,7 @@ def run_performance_monitoring(model, production_data: pd.DataFrame, baseline: d
         critical_threshold=0.10
     )
     
-    print("[OK] Performance monitor initialized with baseline metrics")
+    print("Performance monitor initialized with baseline metrics")
     
     # Get predictions on production data (which has drift - so performance will degrade)
     X_prod = production_data.drop('target', axis=1)
@@ -229,8 +229,8 @@ def run_health_check(drift_report, performance_report):
     
     print(f"\nACTIVE ALERTS ({len(drift_alerts) + len(perf_alerts)}):")
     for alert in (drift_alerts + perf_alerts):
-        priority_label = "[CRITICAL]" if alert.priority.value == "critical" else "[HIGH]" if alert.priority.value == "high" else "[INFO]"
-        print(f"  {priority_label} {alert.title}")
+        priority_label = alert.priority.value.upper()
+        print(f"  ({priority_label}) {alert.title}")
         print(f"     {alert.message}")
     
     print(f"\nRETRAINING RECOMMENDATION:")
@@ -272,7 +272,7 @@ def generate_json_report(drift_report, performance_report, health_summary):
     with open(output_file, 'w') as f:
         json.dump(report, f, indent=2)
     
-    print(f"[OK] Report saved to: {output_file}")
+    print(f"Report saved to: {output_file}")
     print(f"\nReport Preview:")
     print(json.dumps({
         "overall_status": report["health_summary"]["overall_status"],
